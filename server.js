@@ -6,7 +6,6 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded( {extended: true} ));
-const port = /*process.env.DB_PORT |*/ 3000;
 
 // Anslut till databasen
 const client = new Client ({
@@ -46,9 +45,15 @@ app.post('/', async (req, res) => {
     const courseName = req.body.name;
     const courseSyll = req.body.syllabus;
     const courseProg = req.body.progression;
+    
+    // SQL
+    const result = await client.query("INSERT INTO courses(coursecode, coursename, syllabus, progression)VALUES($1, $2, $3, $4)", 
+    [courseCode, courseName, courseSyll, courseProg]);
+
+    res.redirect('/');
 });
 
 // Starta server
-app.listen(port, () => {
-    console.log('Server har startat på port ' + port);
+app.listen(process.env.DB_PORT, () => {
+    console.log('Server har startat på port ' + process.env.DB_PORT);
 });
