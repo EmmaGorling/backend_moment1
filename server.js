@@ -6,7 +6,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded( {extended: true} ));
-const port = process.env.DB_PORT | 3000;
+const port = /*process.env.DB_PORT |*/ 3000;
 
 // Anslut till databasen
 const client = new Client ({
@@ -30,14 +30,22 @@ client.connect((err) => {
 });
 
 // Route
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     res.render('index');
 });
-app.get('/add', (req, res) => {
+app.get('/add', async (req, res) => {
     res.render('addcourse');
 });
 app.get('/about', (req, res) => {
     res.render('about');
+});
+
+app.post('/', async (req, res) => {
+    // Hämta data från formulär
+    const courseCode = req.body.code;
+    const courseName = req.body.name;
+    const courseSyll = req.body.syllabus;
+    const courseProg = req.body.progression;
 });
 
 // Starta server
