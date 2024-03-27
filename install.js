@@ -1,12 +1,5 @@
-const express = require('express');
 const { Client } = require('pg');
 require('dotenv').config();
-
-const app = express();
-app.set('view engine', 'ejs');
-app.use(express.static('public'));
-app.use(express.urlencoded( {extended: true} ));
-const port = process.env.DB_PORT | 3000;
 
 // Anslut till databasen
 const client = new Client ({
@@ -29,18 +22,14 @@ client.connect((err) => {
     }
 });
 
-// Route
-app.get('/', (req, res) => {
-    res.render('index');
-});
-app.get('/add', (req, res) => {
-    res.render('addcourse');
-});
-app.get('/about', (req, res) => {
-    res.render('about');
-});
-
-// Starta server
-app.listen(port, () => {
-    console.log('Server har startat på port ' + port);
-});
+// Skapa tabell i databasen
+client.query(`
+    CREATE TABLE courses(
+        id SERIAL PRIMARY KEY,
+        coursecode VARCHAR(6) NOT NULL,
+        coursename TEXT,
+        syllabus TEXT,
+        progression VARCHAR(2) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )`
+);
