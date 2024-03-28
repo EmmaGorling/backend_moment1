@@ -30,7 +30,16 @@ client.connect((err) => {
 
 // Route
 app.get('/', async (req, res) => {
-    res.render('index');
+    // Hämta från databas
+    client.query('SELECT * FROM courses', (err, result) => {
+        if(err) {
+            console.log('Fel i DB-fråga.')
+        } else {
+            res.render('index', {
+                courses: result.rows
+            });
+        }
+    });
 });
 app.get('/add', async (req, res) => {
     res.render('addcourse');
@@ -39,6 +48,7 @@ app.get('/about', (req, res) => {
     res.render('about');
 });
 
+// Lägg till kurs
 app.post('/', async (req, res) => {
     // Hämta data från formulär
     const courseCode = req.body.code;
@@ -52,6 +62,16 @@ app.post('/', async (req, res) => {
 
     res.redirect('/');
 });
+// Radera kurs
+app.get('/delete/:id', (req, res) => {
+    let id = req.params.id;
+
+    client.query('DELETE FROM courses WHERE id = $1;' , 
+    [id]);
+
+    res.redirect('/');
+})
+
 
 // Starta server
 app.listen(process.env.DB_PORT, () => {
