@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Startsida | Kurser</title>
     <script src="https://kit.fontawesome.com/8726bca3f8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/normalize.css">
 </head>
 <body>
     <header>
@@ -18,18 +20,20 @@
             </ul>
         </nav>
     </header>
-    <main>
+    <main id="index">
         <h1>Befintliga kurser</h1>
         <section>
             <% courses.forEach((course) => {%>
                 <article>
                     <h2><%= course.coursename %></h2>
-                    <p>Kurskod: <%= course.coursecode %></p>
-                    <p>Progression: <%= course.progression %></p>
-                    <a href="<%= course.syllabus %>" target="_blank">Länk till kursplan</a>
-                    <div>
-                        <a href="/delete/<%= course.id %>"><i class="fa-solid fa-trash-can"></i></a>
-                        <a href="/edit/<%= course.id %>"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <div class="courseInfo">
+                        <p>Kurskod: <%= course.coursecode %></p>
+                        <p>Progression: <%= course.progression %></p>
+                        <a href="<%= course.syllabus %>" target="_blank">Länk till kursplan</a>
+                    </div>
+                    <div class="buttons">
+                        <a href="/delete/<%= course.id %>" class="deleteBtn"><i class="fa-solid fa-trash-can"></i></a>
+                        <a href="/edit/<%= course.id %>" class="editBtn"><i class="fa-solid fa-pen-to-square"></i></a>
                     </div>
                 </article>
             <%});%>
