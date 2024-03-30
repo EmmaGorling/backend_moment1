@@ -14,7 +14,7 @@
         <h2>Moment 1</h2>
         <nav>
             <ul>
-                <li><a href="/" class="active">Startsida</a></li>
+                <li class="active"><a href="/" class="active">Startsida</a></li>
                 <li><a href="/add">Lägg till kurs</a></li>
                 <li><a href="/about">Om</a></li>
             </ul>
@@ -26,14 +26,20 @@
             <% courses.forEach((course) => {%>
                 <article>
                     <h2><%= course.coursename %></h2>
-                    <div class="courseInfo">
-                        <p>Kurskod: <%= course.coursecode %></p>
-                        <p>Progression: <%= course.progression %></p>
-                        <a href="<%= course.syllabus %>" target="_blank">Länk till kursplan</a>
-                    </div>
-                    <div class="buttons">
-                        <a href="/delete/<%= course.id %>" class="deleteBtn"><i class="fa-solid fa-trash-can"></i></a>
-                        <a href="/edit/<%= course.id %>" class="editBtn"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <div class="container">
+                        <div class="courseInfo">
+                            <p>
+                                Kurskod: <%= course.coursecode %>
+                                <br>
+                                Progression: <%= course.progression %>
+                                <br>
+                                <a href="<%= course.syllabus %>" target="_blank">Länk till kursplan</a>
+                            </p>
+                        </div>
+                        <div class="buttons">
+                            <a href="/delete/<%= course.id %>" class="deleteBtn"><i class="fa-solid fa-trash-can"></i></a>
+                            <a href="/edit/<%= course.id %>" class="editBtn"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </div>
                     </div>
                 </article>
             <%});%>

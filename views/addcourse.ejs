@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lägg till kurs</title>
-    <link rel="stylesheet" href="/css/main.scss">
+    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/normalize.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
         <nav>
             <ul>
                 <li><a href="/">Startsida</a></li>
-                <li><a href="/add" class="active">Lägg till kurs</a></li>
+                <li class="active"><a href="/add" class="active">Lägg till kurs</a></li>
                 <li><a href="/about">Om</a></li>
             </ul>
         </nav>
@@ -24,22 +24,26 @@
 
         <form method="post" action="/">
             <label for="code">Kurskod:</label>
+            <br>
             <input type="text" name="code" id="code" required>
             <br>
             <label for="name">Kursnamn:</label>
+            <br>
             <input type="text" name="name" id="name" required>
             <br>
             <label for="syllabus">URL till kursplan:</label>
+            <br>
             <input type="url" name="syllabus" id="syllabus" required>
             <br>
             <label for="progression">Progression:</label>
+            <br>
             <select name="progression" id="progression">
                 <option value="A">A</option>
                 <option value="B">B</option>
                 <option value="C">C</option>
             </select>
             <br>
-            <input type="submit" value="Lägg till">
+            <input type="submit" value="Lägg till" id="addBtn">
         </form>
     </main>
     <footer>

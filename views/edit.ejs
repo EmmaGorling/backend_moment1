@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ändra kurs</title>
-    <link rel="stylesheet" href="/css/main.scss">
+    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/normalize.css">
 </head>
 <body>
@@ -24,22 +24,26 @@
 
         <form method="post" action="/edit/<%= courses[0].id %>">
             <label for="code">Kurskod:</label>
+            <br>
             <input type="text" name="code" id="code" required value="<%= courses[0].coursecode %>">
             <br>
             <label for="name">Kursnamn:</label>
+            <br>
             <input type="text" name="name" id="name" required value="<%= courses[0].coursename %>">
             <br>
             <label for="syllabus">URL till kursplan:</label>
+            <br>
             <input type="url" name="syllabus" id="syllabus" required value="<%= courses[0].syllabus %>">
             <br>
             <label for="progression">Progression:</label>
+            <br>
             <select name="progression" id="progression">
                 <option value="A">A</option>
                 <option value="B">B</option>
                 <option value="C">C</option>
             </select>
             <br>
-            <input type="submit" value="Spara ändringar">
+            <input type="submit" value="Spara ändringar" id="addBtn">
         </form>
     </main>
     <footer>
