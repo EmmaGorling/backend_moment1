@@ -70,7 +70,37 @@ app.get('/delete/:id', (req, res) => {
     [id]);
 
     res.redirect('/');
-})
+});
+// Redigera kurs
+app.get('/edit/:id', async (req, res) => {
+    try {
+        let id = req.params.id;
+
+        const result = await client.query('SELECT * FROM courses WHERE id = $1',
+        [id]);
+
+        res.render('edit', {
+            courses: result.rows
+        });
+    } catch (err) {
+        console.log('Fel i DB-fråga:' + err);
+    }
+});
+app.post('/edit/:id', async (req, res) => {
+    // Hämta data
+    let id = req.params.id;
+    const courseCode = req.body.code;
+    const courseName = req.body.name;
+    const courseSyll = req.body.syllabus;
+    const courseProg = req.body.progression;
+
+    // SQL
+    const result = await client.query('UPDATE courses SET coursecode=$1, coursename=$2, syllabus=$3, progression=$4 WHERE id=$5;', 
+    [courseCode, courseName, courseSyll, courseProg, id]);
+
+    // skicka tillbaka till startsidan
+    res.redirect('/');
+});
 
 
 // Starta server
