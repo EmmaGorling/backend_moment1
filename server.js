@@ -42,7 +42,9 @@ app.get('/', async (req, res) => {
     });
 });
 app.get('/add', async (req, res) => {
-    res.render('addcourse');
+    res.render('addcourse', {
+        error: ''
+    });
 });
 app.get('/about', (req, res) => {
     res.render('about');
@@ -55,12 +57,23 @@ app.post('/', async (req, res) => {
     const courseName = req.body.name;
     const courseSyll = req.body.syllabus;
     const courseProg = req.body.progression;
-    
-    // SQL
-    const result = await client.query("INSERT INTO courses(coursecode, coursename, syllabus, progression)VALUES($1, $2, $3, $4)", 
-    [courseCode, courseName, courseSyll, courseProg]);
+    let error = '';
 
-    res.redirect('/');
+    if(courseCode !== '' && courseName !== '' && courseSyll !== '') {
+        // SQL
+        const result = await client.query("INSERT INTO courses(coursecode, coursename, syllabus, progression)VALUES($1, $2, $3, $4)", 
+        [courseCode, courseName, courseSyll, courseProg]);
+
+        res.redirect('/');
+    } else {
+        error = 'Du måste fylla i alla fält.'
+        
+    }
+    res.render('addcourse', {
+        error: error
+    });
+    
+    
 });
 // Radera kurs
 app.get('/delete/:id', (req, res) => {

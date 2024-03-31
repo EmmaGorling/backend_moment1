@@ -3,6 +3,7 @@
 }
 body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    line-height: 1.4em;
     display: grid;
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
@@ -41,12 +42,12 @@ header a {
 }
 
 main {
-    background-color: #704264;
+    background-color: #824f74;
 }
 main h1 {
     text-align: center;
 }
-#index article, form {
+article, form {
     width: 90%;
     max-width: 500px;
     padding: 0.2em 1em;
@@ -54,7 +55,7 @@ main h1 {
     background-color: #BB8493;
     border: 3px solid #49243E;
 }
-#index article h2 {
+article h2 {
     text-align: center;
 }
 .container {
@@ -96,4 +97,16 @@ form input, select {
     margin-top: 1em;
     line-height: 1.5em;
     font-weight: 600;
+}
+.error {
+    color: red;
+    font-weight: bold;
+    font-size: larger;
+}
+
+
+@media (min-width: 600px) {
+    header a {
+        font-size: 1.3em;
+    }
 }

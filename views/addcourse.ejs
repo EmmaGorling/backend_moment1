@@ -13,7 +13,7 @@
         <h2>Moment 1</h2>
         <nav>
             <ul>
-                <li><a href="/">Startsida</a></li>
+                <li><a href="/">Kurser</a></li>
                 <li class="active"><a href="/add" class="active">Lägg till kurs</a></li>
                 <li><a href="/about">Om</a></li>
             </ul>
@@ -25,15 +25,15 @@
         <form method="post" action="/">
             <label for="code">Kurskod:</label>
             <br>
-            <input type="text" name="code" id="code" required>
+            <input type="text" name="code" id="code">
             <br>
             <label for="name">Kursnamn:</label>
             <br>
-            <input type="text" name="name" id="name" required>
+            <input type="text" name="name" id="name">
             <br>
             <label for="syllabus">URL till kursplan:</label>
             <br>
-            <input type="url" name="syllabus" id="syllabus" required>
+            <input type="url" name="syllabus" id="syllabus">
             <br>
             <label for="progression">Progression:</label>
             <br>
@@ -43,6 +43,9 @@
                 <option value="C">C</option>
             </select>
             <br>
+            <% if (error != '') {%>
+                <p class="error"><%= error %></p>
+            <%};%>
             <input type="submit" value="Lägg till" id="addBtn">
         </form>
     </main>
